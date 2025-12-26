@@ -1,46 +1,31 @@
-# 圖像相似度搜尋系統
+# 叭啦叭啦
 
-一個基於 Web 的圖像相似度搜尋系統，使用 Flask、PyTorch 和 ResNet50 模型實現。
+Flask、PyTorch、ResNet50
 
-## 功能特色
-
-- **管理員端**：上傳圖像到資料庫，系統自動提取特徵向量
-- **用戶端**：上傳圖像進行搜尋，系統返回最相似的圖像
-- **AI 驅動**：使用預訓練的 ResNet50 模型進行特徵提取
-- **相似度計算**：使用餘弦相似度算法找出最佳匹配
-
-## 技術棧
-
-- **後端**：Flask (Python)
-- **資料庫**：SQLite (SQLAlchemy ORM)
-- **AI/ML**：PyTorch, torchvision (ResNet50)
-- **前端**：HTML5, CSS3, Vanilla JavaScript
-- **相似度計算**：scikit-learn (cosine similarity)
-
-## 專案結構
+## 結構
 
 ```
 .
-├── app.py                 # Flask 應用程式主檔案
-├── models.py              # 資料庫模型定義
-├── ai_engine.py           # AI 特徵提取和相似度計算
-├── requirements.txt       # Python 依賴套件
-├── README.md             # 專案說明文件
-├── image_search.db       # SQLite 資料庫（自動生成）
+├── app.py                # Flask 主檔案
+├── models.py             # 資料庫模型定義
+├── ai_engine.py          # 特徵提取和相似度計算
+├── requirements.txt      # Python 依賴 (pip)
+├── README.md             # 讀我.媽的
+├── image_search.db       # SQLite 資料庫
 ├── static/
-│   ├── uploads/          # 上傳的圖像儲存目錄
+│   ├── uploads/          # 上傳的圖像目錄
 │   ├── css/
-│   │   └── style.css     # 樣式表
+│   │   └── style.css     
 │   └── js/
-│       └── main.js       # 前端 JavaScript
+│       └── main.js       # 前端 Js
 └── templates/
-    ├── index.html        # 用戶搜尋頁面
-    └── admin.html        # 管理員上傳頁面
+    ├── index.html        # UserInterFace
+    └── admin.html        # Admin
 ```
 
-## 安裝步驟
+## 環境
 
-### 1. 安裝 Python 依賴
+### Python 依賴
 
 ```bash
 pip install -r requirements.txt
@@ -48,10 +33,14 @@ pip install -r requirements.txt
 
 ### 2. 初始化資料庫
 
-資料庫會在首次運行 `app.py` 時自動創建。
+資料庫在運行 `app.py` 時創建。
 
 ### 3. 啟動應用程式
 
+```bash
+python app.py
+```
+如果環境很髒的話用下面這個
 ```bash
 py app.py
 ```
@@ -61,17 +50,19 @@ py app.py
 - **用戶搜尋頁面**：http://127.0.0.1:5000/
 - **管理員上傳頁面**：http://127.0.0.1:5000/admin
 
+那當然是還沒有搞網域..
+
 ## 使用說明
 
 ### 管理員端
 
-1. 訪問 `/admin` 頁面
+1. 訪問 `/admin` 頁面(要求127.0.0.1訪問)
 2. 點擊或拖放圖像到上傳區域
 3. （可選）輸入圖像描述資訊
 4. 點擊「上傳圖像」按鈕
 5. 系統會自動：
-   - 儲存圖像到 `static/uploads/` 目錄（使用 UUID 命名）
-   - 提取圖像特徵向量（使用 ResNet50）
+   - 儲存圖像到 `static/uploads/` 目錄（UUID 命名）
+   - 提取圖像特徵向量（使用 ResNet50）(這可以換 沒差)
    - 儲存圖像資訊和特徵向量到資料庫
 
 ### 用戶端
@@ -82,18 +73,18 @@ py app.py
 4. 系統會：
    - 提取查詢圖像的特徵向量
    - 與資料庫中所有圖像進行相似度比較
-   - 返回最相似的圖像和相似度分數
+   - 返回最相似的圖像和相似度分數 (這可以調) (反正就是 很容易改 相似度那邊)
 
 ## API 端點
 
 ### POST /api/upload
 管理員上傳圖像
 
-**請求**：
+**request**：
 - `file`: 圖像檔案
 - `info`: 圖像描述（可選）
 
-**回應**：
+**apply**：
 ```json
 {
   "success": true,
@@ -110,10 +101,10 @@ py app.py
 ### POST /api/search
 用戶搜尋相似圖像
 
-**請求**：
+**request**：
 - `file`: 要搜尋的圖像檔案
 
-**回應**：
+**apply**：
 ```json
 {
   "success": true,
@@ -135,7 +126,7 @@ py app.py
 ### GET /api/images
 取得所有圖像列表
 
-**回應**：
+**apply**：
 ```json
 {
   "success": true,
@@ -151,27 +142,27 @@ py app.py
 }
 ```
 
-## 資料庫結構
+## sql-structure
 
-### images 表
+### images list
 
-| 欄位 | 類型 | 說明 |
-|------|------|------|
-| id | Integer | 主鍵，自動遞增 |
-| uuid | String(36) | 唯一識別碼 |
-| filename | String(255) | 原始檔名 |
-| feature_vector | Text | 特徵向量（JSON 格式） |
-| info | String(500) | 圖像描述 |
-| created_at | DateTime | 建立時間 |
+|   blank-name   |     type     |       describe       |
+|----------------|--------------|----------------------|
+| id             | Integer      | key-auto-increase    |
+| uuid           | String(36)   | uuid-you-know-it     |
+| filename       | String(255)  | Original-FileName    |
+| feature_vector | Text         | Vector(JSON)         |
+| info           | String(500)  | Describe             |
+| created_at     | DateTime     | Build-time           |
 
 ## 注意事項
 
-1. **首次運行**：系統會自動下載 ResNet50 預訓練模型（約 100MB），需要網路連線
+1. **首次運行**：系統會自動下載 ResNet50 預訓練模型（約 100MB） (ai_engine.py)
 2. **GPU 支援**：如果系統有 CUDA 支援的 GPU，會自動使用 GPU 加速
-3. **檔案大小限制**：預設最大上傳檔案大小為 16MB
+3. **檔案大小限制**：預設最大上傳檔案大小為 16MB  (可調整 app.py : 16)
 4. **支援格式**：PNG, JPG, JPEG, GIF, BMP, WEBP
 
-## 開發說明
+## 說明
 
 ### 修改模型
 
