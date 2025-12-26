@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訪問被禁止 - 403</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .error-code {
+            font-size: 8em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .error-description {
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .back-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+        .back-link:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <div class="error-code">403</div>
+            <div class="error-message">訪問被禁止</div>
+            <div class="error-description">
+                <p>抱歉，您沒有權限訪問此頁面。</p>
+                <p>管理員介面僅允許從本地（127.0.0.1）訪問。</p>
+            </div>
+            <a href="/" class="back-link">返回首頁</a>
+        </div>
+    </div>
+</body>
+</html>
+
