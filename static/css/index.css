@@ -1,0 +1,68 @@
+/* 搜尋結果區域專用樣式 */
+.result-section {
+	margin-top: 40px;
+	padding: 30px;
+	background: #f8f9ff;
+	border-radius: 15px;
+}
+
+.result-section h2 {
+	color: #667eea;
+	margin-bottom: 20px;
+}
+
+.result-content {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 30px;
+}
+
+.result-item h3 {
+	color: #764ba2;
+	margin-bottom: 15px;
+}
+
+.similarity-score {
+	font-size: 3em;
+	font-weight: bold;
+	color: #667eea;
+	text-align: center;
+	padding: 20px;
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.matched-image {
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.matched-image img {
+	width: 100%;
+	max-height: 400px;
+	object-fit: contain;
+	border-radius: 8px;
+	margin-bottom: 15px;
+}
+
+.image-info {
+	color: #333;
+}
+
+.image-info p {
+	margin: 10px 0;
+	line-height: 1.6;
+}
+
+.image-info strong {
+	color: #667eea;
+}
+
+@media (max-width: 768px) {
+	.result-content {
+		grid-template-columns: 1fr;
+	}
+}

@@ -1,0 +1,15 @@
+/* 管理員頁面專用樣式 */
+.admin-notice {
+	background: rgba(255, 193, 7, 0.2);
+	border: 2px solid rgba(255, 193, 7, 0.5);
+	border-radius: 8px;
+	padding: 12px 20px;
+	margin-top: 15px;
+	display: inline-block;
+}
+
+.admin-notice p {
+	margin: 0;
+	font-size: 0.95em;
+	font-weight: 600;
+}

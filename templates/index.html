@@ -1,74 +1,128 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>圖像相似度搜尋系統 - 用戶端</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>🔍 圖像相似度搜尋系統</h1>
-            <p class="subtitle">上傳圖像，尋找最相似的圖片</p>
-        </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>AI 失物招領協尋平台</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/common.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/index.css') }}"
+		/>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>🐕 AI 失物招領協尋平台</h1>
+				<p class="subtitle">
+					遺失了心愛的物品嗎？上傳照片，讓 AI 幫您比對拾獲庫！
+				</p>
+			</header>
 
-        <main>
-            <div class="upload-section">
-                <div class="upload-area" id="uploadArea">
-                    <div class="upload-content">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                        <h3>點擊或拖放圖像到此處</h3>
-                        <p>支援 PNG, JPG, JPEG, GIF, BMP, WEBP</p>
-                        <input type="file" id="fileInput" accept="image/*" hidden>
-                    </div>
-                </div>
+			<main>
+				<div class="upload-section">
+					<div class="upload-area" id="uploadArea">
+						<div class="upload-content">
+							<svg
+								width="64"
+								height="64"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+								></path>
+								<polyline points="17 8 12 3 7 8"></polyline>
+								<line x1="12" y1="3" x2="12" y2="15"></line>
+							</svg>
+							<h3>上傳您的遺失物照片</h3>
+							<p>系統將自動比對特徵，尋找相似的拾獲物品</p>
+							<input
+								type="file"
+								id="fileInput"
+								accept="image/*"
+								hidden
+							/>
+						</div>
+					</div>
 
-                <div class="preview-section" id="previewSection" style="display: none;">
-                    <h3>預覽圖像</h3>
-                    <div class="image-preview">
-                        <img id="previewImage" src="" alt="預覽">
-                    </div>
-                    <button class="btn btn-primary" id="searchBtn">開始搜尋</button>
-                    <button class="btn btn-secondary" id="cancelBtn">取消</button>
-                </div>
-            </div>
+					<div
+						class="preview-section"
+						id="previewSection"
+						style="display: none"
+					>
+						<h3>您的物品照片預覽</h3>
+						<div class="image-preview">
+							<img id="previewImage" src="" alt="預覽" />
+						</div>
+						<button class="btn btn-primary" id="searchBtn">
+							🔍 開始 AI 比對
+						</button>
+						<button class="btn btn-secondary" id="cancelBtn">
+							取消
+						</button>
+					</div>
+				</div>
 
-            <div class="result-section" id="resultSection" style="display: none;">
-                <h2>搜尋結果</h2>
-                <div class="result-content">
-                    <div class="result-item">
-                        <h3>相似度分數</h3>
-                        <div class="similarity-score" id="similarityScore">0%</div>
-                    </div>
-                    <div class="result-item">
-                        <h3>最相似的圖像</h3>
-                        <div class="matched-image">
-                            <img id="matchedImage" src="" alt="匹配的圖像">
-                            <div class="image-info">
-                                <p><strong>檔名:</strong> <span id="matchedFilename"></span></p>
-                                <p><strong>描述:</strong> <span id="matchedInfo"></span></p>
-                                <p><strong>上傳時間:</strong> <span id="matchedDate"></span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+				<div
+					class="result-section"
+					id="resultSection"
+					style="display: none"
+				>
+					<h2>📝 比對結果</h2>
+					<div class="result-content">
+						<div class="result-item">
+							<h3>相似度分數</h3>
+							<div class="similarity-score" id="similarityScore">
+								0%
+							</div>
+						</div>
+						<div class="result-item">
+							<h3>最相似的拾獲物</h3>
+							<div class="matched-image">
+								<img
+									id="matchedImage"
+									src=""
+									alt="匹配的圖像"
+								/>
+								<div class="image-info">
+									<p>
+										<strong>特徵/描述:</strong>
+										<span id="matchedInfo"></span>
+									</p>
+									<p>
+										<strong>拾獲時間:</strong>
+										<span id="matchedDate"></span>
+									</p>
+									<p>
+										<strong>原始檔名:</strong>
+										<span id="matchedFilename"></span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-            <div class="loading" id="loading" style="display: none;">
-                <div class="spinner"></div>
-                <p>正在處理中...</p>
-            </div>
+				<div class="loading" id="loading" style="display: none">
+					<div class="spinner"></div>
+					<p>AI 正在比對特徵中...</p>
+				</div>
 
-            <div class="error-message" id="errorMessage" style="display: none;"></div>
-        </main>
-    </div>
+				<div
+					class="error-message"
+					id="errorMessage"
+					style="display: none"
+				></div>
+			</main>
+		</div>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-</body>
+		<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+	</body>
 </html>
-
